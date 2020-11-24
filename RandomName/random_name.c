@@ -27,7 +27,6 @@ void orderNames(char** all_names, FILE* out){
        }
     for (int i = 0; i < MAX_LEN; i++)
         fprintf(out, "%s\n", all_names[i]);
-   
 }
 
 void randomizeNames(char** all_names, char** chosen_names){
