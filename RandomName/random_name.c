@@ -139,8 +139,4 @@ int main(){
     free(chosen_quotes);
     free(all_quotes);
     return 0;
-
-    
-    
-    
 }
