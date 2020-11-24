@@ -10,6 +10,7 @@
 #define QUOTES 391
 #define QUOTES_LEN 140
 
+
 int compare(const void *a, const void *b)
 {
     char **a1= (char **)a;    
