@@ -7,7 +7,7 @@
 #define MAX_LEN 969
 #define CHOSEN_LEN 20
 #define WORD 50
-#define QUOTES 391
+#define QUOTES 313
 #define QUOTES_LEN 140
 
 
@@ -100,11 +100,12 @@ int main(){
         char *tmp = (char *)malloc(3*QUOTES_LEN*sizeof(char));
         fgets(tmp, 3*QUOTES_LEN, quotes);
         tmp[strcspn(tmp, "\n")] = 0;
-        realloc(tmp, QUOTES_LEN*sizeof(char));
+        // realloc(tmp, QUOTES_LEN*sizeof(char));
         if (strlen(tmp) > QUOTES_LEN)
             continue;
         strcpy(all_quotes[i], tmp);
         i++;
+        free(tmp);
     }
 
     // orderNames(all_names, sorted);
@@ -112,15 +113,24 @@ int main(){
     randomizeQuotes(all_quotes, chosen_quotes);
 
 
-    for (int i = 0; i < CHOSEN_LEN; i++)
-        fprintf(out, "\"%s\", ", chosen_names[i]);
-
+    for (int i = 0; i < CHOSEN_LEN; i++){
+        if(i == CHOSEN_LEN-1)
+            fprintf(out, "\"%s\"", chosen_names[i]);
+        else
+            fprintf(out, "\"%s\", ", chosen_names[i]);
+    }
     
-    for (int i = 0; i < CHOSEN_LEN; i++)
-        fprintf(quotes_out, "\"%s\", ", chosen_quotes[i]);
+    for (int i = 0; i < CHOSEN_LEN; i++){
+        if (i == CHOSEN_LEN-1)
+            fprintf(quotes_out, "\"%s\"", chosen_quotes[i]);
+        else
+            fprintf(quotes_out, "\"%s\", ", chosen_quotes[i]);
+    }
+        
+        
     
     for(int i = 0; i < CHOSEN_LEN; i++)
-        puts(chosen_names[i]);
+        puts(chosen_quotes[i]);
 
 
     for (int i = 0; i < CHOSEN_LEN; i++){
@@ -134,6 +144,10 @@ int main(){
        for (int i = 0; i < QUOTES; i++)
         free(all_quotes[i]);
 
+    fclose(names);
+    fclose(out);
+    fclose(quotes);
+    fclose(quotes_out);
     free(all_names);
     free(chosen_names);
     free(chosen_quotes);
